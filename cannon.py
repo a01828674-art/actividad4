@@ -50,6 +50,12 @@ def move():
     for target in targets:
         # Velocidad de los balones aumentada (de 0.5 a 1.5)
         target.x -= 1.5
+        
+        # SI EL BALÓN SALE DE LA PANTALLA:
+        # En lugar de perder, se reposiciona al borde derecho con una 'y' aleatoria
+        if not inside(target):
+            target.x = 200
+            target.y = randrange(-150, 150)
 
     if inside(ball):
         speed.y -= 0.35
@@ -64,9 +70,7 @@ def move():
 
     draw()
 
-    for target in targets:
-        if not inside(target):
-            return
+    # Se eliminó la verificación que terminaba el juego con 'return'
 
     ontimer(move, 50)
 
